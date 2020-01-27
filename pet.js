@@ -19,7 +19,7 @@ const Pet = function(name, type) {
 
 //class method to feed pet
 Pet.prototype.feed = function() {
-  if (this.hunger >= 5) {
+  if (this.hunger >= 10) {
     this.status = "That was yummy";
     this.hunger -= 10;
     this.sleepiness += 8;
@@ -106,17 +106,21 @@ Pet.prototype.destroyFurniture = function() {
 
 //class method to buy new furniture
 Pet.prototype.buyNewFurniture = function() {
-  this.houseCondition -= 15;
-  bounder(this.houseCondition);
-  this.status = "Are you sure about that?";
+  if (this.houseCondition >= 10) {
+    this.houseCondition -= 10;
+    bounder(this.houseCondition);
+    this.status = "Are you sure about that?";
+  } else {
+    this.status = "Not enough damage yet!";
+  }
 };
 
-function bounder(i) {
-  if (i < 0) {
-    i = 0;
+function bounder(num) {
+  if (num <= 0) {
+    num = 1;
   }
-  if (i > 20) {
-    i = 20;
+  if (num > 20) {
+    num = 20;
   }
 }
 
